@@ -8,121 +8,26 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="style/style1.css">
+
     <style>
-        :root {
-            --primary-blue: #1a3c5f;
-            --accent-blue: #00b4d8;
-            --dark-bg: #0f2135;
-        }
-
-        .navbar { 
-            background-color: #000000; 
-        }    
-
-        /* หัวข้อหน้าเพจสไตล์โมเดิร์น */
-        .about-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-bg) 100%);
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .about-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-blue);
-        }
-
-        /* การ์ดสินค้าแต่ละชิ้น (ขยายระยะด้านในให้โปร่งขึ้น) */
+        /* สไตล์เพิ่มเติมเพื่อให้คลิกได้ทั้งกล่องและเกิดมิติเงาลอย */
         .jig-card {
-            background: #ffffff;
-            padding: 24px; /* เพิ่มพื้นที่รอบรูปภาพให้ดูพรีเมียม */
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid #eef2f6;
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: relative; /* สำคัญมาก: เพื่อควบคุมให้พื้นที่คลิก (stretched-link) อยู่แค่ในการ์ดตัวเอง */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
-        
+
+        /* เอฟเฟกต์การลอยตัวและเงาเมื่อชี้เมาส์ที่ตัวกล่อง */
         .jig-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 180, 216, 0.4);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
-        /* กรอบรูปภาพ (ขยายให้เต็มสัดส่วนของการ์ด) */
-        .jig-img-wrapper {
+        /* ปรับตำแหน่งคลิกของป้าย badge ไม่ให้บังการคลิกหลัก */
+        .jig-badge a {
             position: relative;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            width: 100%;
-            max-width: 100%; /* 🌟 ปรับให้ขยายเต็มความกว้างคอลัมน์ */
-            margin: 0 auto 20px auto;
-            cursor: pointer; /* 🌟 เพิ่มเมาส์รูปมือเพื่อให้รู้ว่ากดดูรูปได้ */
-        }
-        
-        /* บังคับสัดส่วนรูปภาพ */
-        .jig-img {
-            width: 100%;
-            aspect-ratio: 1 / 1; 
-            display: block;
-            object-fit: cover;
-        }
-
-        /* ป้ายชื่อสินค้า (ปรับขนาดตัวหนังสือและระยะกดให้พอดี) */
-        .jig-badge {
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
-            color: white;
-            font-weight: bold;
-            padding: 10px 24px; /* เพิ่มพื้นที่ป้ายให้กด/ดูง่ายขึ้น */
-            border-radius: 6px;
-            display: inline-block;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            font-size: 0.9rem; /* ปรับขนาดฟอนต์ให้ชัดเจนเต็มตา */
-            text-align: center;
-            width: auto;
-            min-width: 180px;
-        }
-        .jig-badge.alt {
-            background: linear-gradient(90deg, #0d47a1, #1565c0);
-        }
-
-        /* ==========================================
-           📱 สไตล์เฉพาะสำหรับหน้าจอมือถือ (Mobile เท่านั้น)
-           จะไม่กระทบหรือเปลี่ยนแปลงการแสดงผลบนคอมพิวเตอร์เลย
-           ========================================== */
-        @media (max-width: 767.98px) {
-            .about-header {
-                padding: 40px 15px !important;
-                margin-bottom: 25px !important;
-            }
-            .about-header h1 {
-                font-size: 2rem !important;
-            }
-            .about-header p {
-                font-size: 0.95rem !important;
-            }
-            .jig-card {
-                padding: 16px !important;
-            }
-            .jig-badge {
-                width: 100% !important;
-                font-size: 0.85rem !important;
-                padding: 10px 15px !important;
-            }
+            z-index: 2;
         }
     </style>
 </head>
@@ -132,7 +37,7 @@
 
     <div class="about-header text-center shadow-sm">
         <div class="container px-4">
-            <h1 class="display-5 fw-bold m-0"> Machining and Spear Parts </h1>
+            <h1 class="display-5 fw-bold m-0"> Machining and Spare Parts </h1>
             <p class="fs-6 text-white-50 mt-2 mb-0"> ชิ้นส่วนในงานอุตสาหกรรมและเครื่องจักร  </p>
         </div>
     </div>
@@ -145,7 +50,8 @@
                     <div class="jig-img-wrapper">
                         <img src="SP1/sp1.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job1.html" class="text-white text-primary text-decoration-none"> .......... </a></span>
+                    <span class="jig-badge"> .......... </span>
+                    <a href="SP_job1.html" class="stretched-link"></a>
                 </div>
             </div>
 
@@ -154,7 +60,8 @@
                     <div class="jig-img-wrapper">
                         <img src="SP2/sp2.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job2.html" class="text-white text-primary text-decoration-none"> .......... </a></span>
+                    <span class="jig-badge"> Test Disbrake </span>
+                    <a href="SP_job2.html" class="stretched-link"></a>
                 </div>
             </div>
 
@@ -163,7 +70,8 @@
                     <div class="jig-img-wrapper">
                         <img src="SP3/sp3.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job3.html" class="text-white text-primary text-decoration-none"> .......... </a></span>
+                    <span class="jig-badge"> .......... </span>
+                    <a href="SP_job3.html" class="stretched-link"></a>
                 </div>
             </div>
 
@@ -172,7 +80,8 @@
                     <div class="jig-img-wrapper">
                         <img src="SP4/sp4.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job4.html" class="text-white text-primary text-decoration-none"> Pin Gate </a></span>
+                    <span class="jig-badge"> Pin Gate </span>
+                    <a href="SP_job4.html" class="stretched-link"></a>
                 </div>
             </div>
 
@@ -181,7 +90,8 @@
                     <div class="jig-img-wrapper">
                         <img src="SP5/sp5.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job5.html" class="text-white text-primary text-decoration-none"> .......... </a></span>
+                    <span class="jig-badge"> .......... </span>
+                    <a href="SP_job5.html" class="stretched-link"></a>
                 </div>
             </div>
 
@@ -190,10 +100,20 @@
                     <div class="jig-img-wrapper">
                         <img src="SP6/sp6.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
                     </div>
-                    <span class="jig-badge"><a href="SP_job6.html" class="text-white text-primary text-decoration-none"> Mold </a></span>
+                    <span class="jig-badge"> Mold </span>
+                    <a href="SP_job6.html" class="stretched-link"></a>
                 </div>
             </div>
 
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="jig-card">
+                    <div class="jig-img-wrapper">
+                        <img src="SP7/sp7.1.jpg" class="jig-img" alt="Jig Fixture 1" onerror="this.src='https://placehold.co/400x400?text=Jig+Fixture+1'">
+                    </div>
+                    <span class="jig-badge"> Tray </span>
+                    <a href="SP_job7.html" class="stretched-link"></a>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -209,13 +129,24 @@
             </div>
         </div>
     </div>
-
+    <div class="container px-4">
+    <!-- กลุ่มปุ่มเมนูแนวนอน -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto">
+            <div class="btn-group flex-wrap" role="group" aria-label="Footer Navigation">
+                <a href="J_job.html" class="btn btn-outline-primary text-white border-secondary px-3 py-2 small">Jig Fixture</a>
+                <a href="M_job.html" class="btn btn-outline-primary text-white border-secondary px-3 py-2 small">Machine Order</a>
+                <a href="MD_job.html" class="btn btn-outline-primary text-white border-secondary px-3 py-2 small">Modify</a>
+                <a href="SP_job.html" class="btn btn-outline-primary text-white border-secondary px-3 py-2 small">Machining and Spare Parts</a>
+                <a href="Our_customer.html" class="btn btn-outline-primary text-white border-secondary px-3 py-2 small">Our Customers</a>
+            </div>
+        </div>
+    </div>
     <div id="Foot-placeholder"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    // 1. ดึงข้อมูลไฟล์ Head.html (ถอดสคริปต์สแกนตรวจสอบลิงก์รูปแบบเก่าออก เพื่อควบคุมสีเมนูให้ไม่เพี้ยน)
     fetch('Head.html') 
         .then(response => {
             if (!response.ok) throw new Error("หาไฟล์ Head.html ไม่เจอจ้า");
@@ -226,7 +157,6 @@
         })
         .catch(error => console.error('มีปัญหาในการโหลด Head:', error));
 
-    // 2. ดึงข้อมูลไฟล์ Foot.html
     fetch('Foot.html')
         .then(response => {
             if (!response.ok) throw new Error("หาไฟล์ Foot.html ไม่เจอจ้า");
@@ -236,24 +166,6 @@
             document.getElementById('Foot-placeholder').innerHTML = data;
         })
         .catch(error => console.error('มีปัญหาในการโหลด Foot:', error));
-
-    // 🌟 3. สคริปต์เปิดดูรูปภาพขนาดเต็ม (เพิ่มเข้ามาใหม่)
-    document.addEventListener("DOMContentLoaded", function () {
-        const lightboxModalEl = document.getElementById('imageLightboxModal');
-        const lightboxModal = new bootstrap.Modal(lightboxModalEl);
-        const lightboxImage = document.getElementById('lightboxImage');
-        const imgWrappers = document.querySelectorAll('.jig-img-wrapper');
-
-        imgWrappers.forEach(wrapper => {
-            wrapper.addEventListener('click', function () {
-                const targetImg = this.querySelector('.jig-img');
-                if (targetImg) {
-                    lightboxImage.src = targetImg.src;
-                    lightboxModal.show();
-                }
-            });
-        });
-    });
     </script>
 </body>
 </html>

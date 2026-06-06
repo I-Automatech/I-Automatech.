@@ -1,0 +1,162 @@
+
+        :root {
+            --primary-blue: #1a3c5f;
+            --accent-blue: #00b4d8;
+            --dark-bg: #0f2135;
+        }
+
+        .navbar { 
+            background-color: #000000; 
+        }    
+
+        /* หัวข้อหน้าเพจสไตล์โมเดิร์น */
+        .about-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-bg) 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .about-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-blue);
+        }
+
+        /* การ์ดสินค้าแต่ละชิ้น */
+        .jig-card {
+            background: #ffffff;
+            padding: 24px; 
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ffffff;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .jig-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            border-color: #4444e2;
+        }
+
+        /* กรอบรูปภาพ */
+        .jig-img-wrapper {
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000000;
+            border: 0.5px solid #000000;
+            width: 100%;
+            max-width: 100%; 
+            margin: 0 auto 20px auto;
+            cursor: pointer; /* 🌟 เพิ่มเมาส์รูปมือให้รู้ว่ากดดูรูปได้ */
+        }
+        
+        /* บังคับสัดส่วนรูปภาพ */
+        .jig-img {
+            width: 100%;
+            aspect-ratio: 1 / 1; 
+            display: block;
+            object-fit: cover;
+        }
+
+        /* ป้ายชื่อสินค้า */
+        .jig-badge {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            font-weight: bold;
+            padding: 10px 24px; 
+            border-radius: 6px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            font-size: 0.9rem; 
+            text-align: center;
+            width: auto;
+            min-width: 180px;
+        }
+        .jig-badge.alt {
+            background: linear-gradient(90deg, #0d47a1, #1565c0);
+        }
+        /* ==========================================
+        🛠️ สไตล์เพิ่มเติมสำหรับเมนูปุ่มท้ายเพจ (แบบที่ 2)
+        ========================================== */
+        .btn-group {
+            display: flex !important;
+            flex-wrap: wrap;       /* ถ้ารวมกันแล้วเกินหน้าจอให้ยอมขึ้นบรรทัดใหม่ */
+            justify-content: center;
+            width: 100%;           /* ให้กว้างเต็มพื้นที่ตัวคลุม */
+            max-width: 1000px;     /* จำกัดความกว้างสูงสุดไม่ให้แผ่กว้างเกินไปบนจอคอม */
+            margin: 0 auto;
+        }
+        /* ปรับแต่งปุ่มในกลุ่มเมนูทั้งหมด */
+        .btn-group .btn-outline-primary {
+            flex: 1 1 0px;         /* เคล็ดลับดักทุกปุ่มให้ขยายเท่ากันอัตโนมัติ */
+            min-width: 200px;      /* กำหนดขนาดขั้นต่ำไว้ ไม่ให้ปุ่มบีบจนตัวหนังสือพัง */
+            background-color: var(--dark-bg);   /* สีพื้นหลังตอนปกติ */
+            color: #ffffff !important;           /* สีตัวอักษร */
+            border: 1px solid #2a4e75 !important;/* สีเส้นขอบปุ่ม */
+            font-size: 1.2rem;
+            transition: all 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;      /* จัดให้อยู่ตรงกลาง แนวตั้ง (บน-ล่าง) */
+            justify-content: center;  /* จัดให้อยู่ตรงกลาง แนวนอน (ซ้าย-ขวา) */
+            min-height: 54px;         /* ล็อคความสูงขั้นต่ำของปุ่มให้เท่ากันทุกปุ่ม */
+        }
+
+        /* เมื่อเอาเมาส์ไปชี้ (Hover) หรือปุ่มถูกกดอยู่ (Active) */
+        .btn-group .btn-outline-primary:hover,
+        .btn-group .btn-outline-primary:active,
+        .btn-group .btn-outline-primary:focus {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue)) !important; /* ไล่เฉดสีน้ำเงิน */
+            color: #ffffff !important;
+            border-color: var(--accent-blue) !important;
+            transform: translateY(-2px); /* ลอยขึ้นเล็กน้อยเพิ่มความโมเดิร์น */
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.2); /* เพิ่มเรืองแสงสีฟ้าอ่อนๆ */
+        }
+
+        /* ==========================================
+           📱 สไตล์เฉพาะสำหรับหน้าจอมือถือ (Mobile เท่านั้น)
+           จะไม่กระทบหรือเปลี่ยนแปลงการแสดงผลบนคอมพิวเตอร์เลย
+           ========================================== */
+        @media (max-width: 767.98px) {
+            .about-header {
+                padding: 40px 15px !important; /* กระชับแถบหัวข้อด้านบน */
+                margin-bottom: 25px !important;
+            }
+            .about-header h1 {
+                font-size: 2rem !important; /* ปรับขนาดหัวข้อให้อ่านง่ายบนมือถือ */
+            }
+            .about-header p {
+                font-size: 0.95rem !important;
+            }
+            .jig-card {
+                padding: 16px !important; /* ปรับลด Padding ด้านในการ์ดให้รูปภาพแสดงได้ใหญ่ขึ้น */
+            }
+            .jig-badge {
+                width: 100% !important; /* บังคับให้ป้ายขยายกว้างพอดีกับการ์ดบนจอมือถือ */
+                font-size: 0.85rem !important;
+                padding: 10px 15px !important;
+            }
+            .btn-group {
+             display: flex !important;
+            flex-direction: column; /* เปลี่ยนจากเรียงแถวนอนเป็นเรียงลงมาแนวตั้ง */
+            width: 100%;
+            gap: 8px; /* ห่างกันช่องละนิด */
+            }
+    
+            .btn-group .btn-outline-primary {
+            border-radius: 8px !important; /* มนทุกปุ่มเท่ากันเมื่อแยกแถว */
+            text-align: center;
+        }
+}

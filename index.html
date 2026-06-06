@@ -21,35 +21,97 @@
             padding: 100px 0;
             text-align: center;
         }
+
+        /* ตกแต่ง Service Card ทั้งหมดให้ลอยและมีเงา */
         .service-card {
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: 0.3s;
+            border: none !important;
+            border-radius: 12px !important;
+            background-color: #ffffff;
+            position: relative; /* สำคัญมากเพื่อให้ stretched-link ทำงานแม่นยำ */
+            
+            /* เอฟเฟกต์การลอยตัวและเงาแบบนุ่มนวลเริ่มต้น */
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 
+                        0 1px 5px rgba(0, 0, 0, 0.08);
+            
+            /* ตั้งค่าการเคลื่อนไหวให้ดูสมูท */
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
+
+        /* เอฟเฟกต์เมื่อเอาเมาส์ไปชี้ (Hover): ให้กล่องลอยเด่นขึ้นมาเหนือวิดีโอ */
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) !important; 
+            box-shadow: 0 12px 24px #000000, 
+                        0 6px 12px #000000 !important;
         }
+
+        /* เอฟเฟกต์เมื่อกดคลิก (Active): ให้กล่องยุบลงไปเล็กน้อย */
+        .service-card:active {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px #000000 !important;
+        }
+
         .img-dimension {
             box-shadow: 0 10px 30px rgba(45, 21, 21, 0.2);
         }
 
         /* ==========================================
+           🎬 สไตล์สำหรับวิดีโอพื้นหลัง (Video Background)
+           ========================================== */
+        .services-video-bg {
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff; 
+        }
+
+        .video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* เลเยอร์สีโปร่งแสงทับวิดีโอเพื่อให้เห็นข้อความบนหน้าเว็บชัดเจน */
+        .services-video-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.45); 
+            z-index: 2;
+        }
+
+        /* ดันเนื้อหาคอนเทนต์ทั้งหมดให้อยู่เหนือวิดีโอ */
+        .services-video-bg .container {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* ==========================================
            📱 สไตล์เฉพาะสำหรับหน้าจอมือถือ (Mobile เท่านั้น)
-           จะไม่กระทบหรือเปลี่ยนแปลงการแสดงผลบนคอมพิวเตอร์เลย
            ========================================== */
         @media (max-width: 767.98px) {
             .hero-section {
-                padding: 60px 15px; /* ลดความสูงของแถบน้ำเงินลงให้กระชับบนมือถือ */
+                padding: 60px 15px; 
                 margin-top: 10px !important; 
             }
             .hero-section h1 {
-                font-size: 1.8rem !important; /* ย่อขนาดหัวข้อหลักไม่ให้ยาวล้นจอมือถือ */
+                font-size: 1.8rem !important; 
             }
             .hero-section p {
                 font-size: 1rem !important; 
             }
             .display-5 {
-                font-size: 2rem !important; /* ปรับขนาดหัวข้อ Our Services */
+                font-size: 2rem !important; 
             }
             .text-muted.fs-4 {
                 font-size: 1.2rem !important; 
@@ -58,7 +120,7 @@
                 font-size: 1.25rem !important; 
             }
             .card-text {
-                font-size: 0.95rem !important; /* ย่อตัวหนังสืออธิบายการ์ดให้อ่านง่ายพอดีสายตา */
+                font-size: 0.95rem !important; 
             }
         }
     </style>
@@ -75,71 +137,78 @@
         </div>
     </div>
 
-    <div class="container my-5 px-4">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold display-5">Our Services</h2>
-            <p class="text-muted fs-4">สินค้า / บริการของเรา</p>
-        </div>
-
-        <div class="row g-4 mb-5">
-            
-            <div class="col-12 col-md-4">
-                <div class="card service-card h-100 p-2 p-md-3">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-primary">
-                            <a href="J_job.html" class="text-primary text-decoration-none">Jig Fixture</a>
-                        </h5>
-                        <p class="card-text text-muted">อุปกรณ์จับยึดชิ้นงานในกระบวนการผลิต เพื่อกำหนดตำแหน่งให้ถูกต้อง แม่นยำ และเหมือนกันทุกชิ้น ช่วยให้ทำงานได้รวดเร็ว ลดต้นทุน และไม่ต้องพึ่งทักษะความชำนาญเฉพาะตัวของช่าง</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card service-card h-100 p-2 p-md-3">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-primary">
-                            <a href="M_Job.html" class="text-primary text-decoration-none">Machine Order</a>
-                        </h5>
-                        <p class="card-text text-muted">เครื่องจักร เครื่องกล หรืออุปกรณ์ คือสิ่งประดิษฐ์ที่ประกอบด้วยชิ้นส่วนหลายชิ้น ทำงานประสานกันเพื่อเปลี่ยนรูปพลังงานและทุ่นแรงมนุษย์ โดยถูกสร้างมาให้ทำงานเฉพาะเจาะจง หรืองานซ้ำๆ ได้อย่างรวดเร็วและแม่นยำ</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card service-card h-100 p-2 p-md-3">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-primary">
-                            <a href="MD_job.html" class="text-primary text-decoration-none">Modify</a>
-                        </h5>
-                        <p class="card-text text-muted">การดัดแปลง ปรับปรุง หรือแก้ไขเครื่องจักร โดยการเพิ่ม เปลี่ยนแปลง หรือถอดส่วนประกอบต่างๆ ออก เพื่อให้เครื่องจักรสามารถทำงานได้ตอบโจทย์ความต้องการใหม่ๆ ทำงานได้เร็วขึ้น แม่นยำขึ้น หรือเปลี่ยนระบบการทำงานจากแบบใช้แรงคน (Manual) ให้เป็นระบบอัตโนมัติ (Automation)</p>
-                    </div>
-                </div>
-            </div>
+    <div class="services-video-bg py-5 my-5">
         
-            <div class="col-12 col-md-4 mx-auto">
-                <div class="card service-card h-100 p-2 p-md-3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold text-primary">
-                            <a href="SP_job.html" class="text-primary text-decoration-none"> Machining and Spear Parts </a>
-                        </h5>
-                        <p class="card-text text-muted"> การสร้างชิ้นงาน และชิ้นส่วนด้วยเทคโนโลยี CNC และ Wire Cut EDM </p>
-                    </div>
-                </div>
+        <video class="video-container" autoplay muted loop playsinline>
+            <source src="Logo/Logo3.mp4" type="video/mp4">
+        </video>
+
+        <div class="container px-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold display-5">Our Services</h2>
+                <p class="text-muted fs-4">สินค้า / บริการของเรา</p>
             </div>
 
-            <div class="col-12 col-md-4 mx-auto">
-                <div class="card service-card h-100 p-2 p-md-3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold text-primary">
-                            <a href="Our_customer.html" class="text-primary text-decoration-none">Our Customer</a>
-                        </h5>
-                        <p class="card-text text-muted">ลูกค้าที่ไว้วางใจเลือกซื้อสินค้าและบริการของธุรกิจเรา</p>
+            <div class="row g-4 mb-5">
+                
+                <div class="col-12 col-md-4">
+                    <div class="card service-card h-100 p-2 p-md-3">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary">
+                                <a href="J_job.html" class="text-primary text-decoration-none stretched-link">Jig Fixture</a>
+                            </h5>
+                            <p class="card-text text-muted">อุปกรณ์จับยึดชิ้นงานในกระบวนการผลิต เพื่อกำหนดตำแหน่งให้ถูกต้อง แม่นยำ และเหมือนกันทุกชิ้น ช่วยให้ทำงานได้รวดเร็ว ลดต้นทุน และไม่ต้องพึ่งทักษะความชำนาญเฉพาะตัวของช่าง</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="col-12 col-md-4">
+                    <div class="card service-card h-100 p-2 p-md-3">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary">
+                                <a href="M_Job.html" class="text-primary text-decoration-none stretched-link">Machine Order</a>
+                            </h5>
+                            <p class="card-text text-muted">เครื่องจักร เครื่องกล หรืออุปกรณ์ คือสิ่งประดิษฐ์ที่ประกอบด้วยชิ้นส่วนหลายชิ้น ทำงานประสานกันเพื่อเปลี่ยนรูปพลังงานและทุ่นแรงมนุษย์ โดยถูกสร้างมาให้ทำงานเฉพาะเจาะจง หรืองานซ้ำๆ ได้ได้อย่างรวดเร็วและแม่นยำ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="card service-card h-100 p-2 p-md-3">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary">
+                                <a href="MD_job.html" class="text-primary text-decoration-none stretched-link">Modify</a>
+                            </h5>
+                            <p class="card-text text-muted">การดัดแปลง ปรับปรุง หรือแก้ไขเครื่องจักร โดยการเพิ่ม เปลี่ยนแปลง หรือถอดส่วนประกอบต่างๆ ออก เพื่อให้เครื่องจักรสามารถทำงานได้ตอบโจทย์ความต้องการใหม่ๆ ทำงานได้เร็วขึ้น แม่นยำขึ้น หรือเปลี่ยนระบบการทำงานจากแบบใช้แรงคน (Manual) ให้เป็นระบบอัตโนมัติ (Automation)</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-12 col-md-4 mx-auto">
+                    <div class="card service-card h-100 p-2 p-md-3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold text-primary">
+                                <a href="SP_job.html" class="text-primary text-decoration-none stretched-link">Machining and Spare Parts</a>
+                            </h5>
+                            <p class="card-text text-muted">การสร้างชิ้นงาน และชิ้นส่วนด้วยเทคโนโลยี CNC และ Wire Cut EDM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mx-auto">
+                    <div class="card service-card h-100 p-2 p-md-3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold text-primary">
+                                <a href="Our_customer.html" class="text-primary text-decoration-none stretched-link">Our Customer</a>
+                            </h5>
+                            <p class="card-text text-muted">ลูกค้าที่ไว้วางใจเลือกซื้อสินค้าและบริการของธุรกิจเรา</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
         </div> 
-    </div> 
+    </div>
 
     <div id="Foot-placeholder"></div>
 
@@ -154,11 +223,9 @@
         .then(data => {
             document.getElementById('Head-placeholder').innerHTML = data;
 
-            // บังคับเคลียร์สีลิงก์ทุกตัวเป็นสีขาวจางก่อน
             const links = document.querySelectorAll('#main-nav .nav-link');
             links.forEach(link => link.style.setProperty('color', 'rgba(255,255,255,0.5)', 'important'));
 
-            // บังคับให้ปุ่มที่ 1 (Home) เป็นสีขาวสว่างเข้มข้นที่สุด
             const activeLink = document.querySelector('#main-nav .nav-link:nth-child(1)');
             if (activeLink) {
                 activeLink.style.setProperty('color', '#ffffff', 'important');
